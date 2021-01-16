@@ -48,7 +48,7 @@ router.get("/", function (req, res, next) {
     // othername = $(".truyen_info_right li:nth-child(1) span").text();
     author = $("[itemprop=author]").text();
     console.log(author)
-    $("[itemprop=genre]").each(function (result) {
+    $(".info [itemprop=genre]").each(function (result) {
       genres = $(this).text();
       idgenres = $(this).attr("href");
       idgenres = idgenres.slice(idgenres.search("the-loai") + 9);
