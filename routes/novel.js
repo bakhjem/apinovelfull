@@ -60,7 +60,11 @@ router.get("/", function (req, res, next) {
         idgenres: idgenres
       });
     });
-    status = $("span.text-primary").text();
+   let status = $("span.text-primary").text();
+   console.log(status)
+   if(status === ''){
+    status = $("span.text-success").text();
+   }
     description = $("[itemprop=description]").html();
     // des = $("#noidungm").text();
     // // description = description.slice(1,description.search('<hr>'))
