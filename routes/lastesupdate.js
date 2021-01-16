@@ -31,6 +31,7 @@ router.get("/", function (req, res, next) {
   var idnovel = null;
   var idchapter = null;
   var cover = null;
+  var mcover = null;
   var lastupdates = [];
   var update_time = null;
   var id = null;
@@ -38,11 +39,6 @@ router.get("/", function (req, res, next) {
   var totalpages = null;
   var des = null;
   getPageContent(URL + page).then($ => {
-    // console.log(
-    //   "http://www.nettruyen.com/tim-truyen?status=-1&sort=15&page=" + page
-    // );
-    // var pagett = $(".pagination-outter ul li.hidden").text();
-    // totalpage = pagett.slice(pagett.search("/") + 2);
     $("div.row[itemscope]").each(function (result) {
       console.log($(this).html())
       $(this)
@@ -72,17 +68,9 @@ router.get("/", function (req, res, next) {
         .find(".lazyimg")
         .each(function () {
           cover = $(this).attr('data-desk-image');
-          // cover = 'https://webnovel.online' + cover;
-          // console.log(cover);
-          //   console.log(idchapter)
+          mcover = $(this).attr('data-image');
         });
-      // $(this)
-      //   .find("span:nth-child(2)")
-      //   .each(function () {
-      //     view = $(this).text();
-      //     // console.log(cover);
-      //     //   console.log(idchapter)
-      //   });
+
 
       data.push({
         'novelsname': novelsname,
@@ -90,6 +78,7 @@ router.get("/", function (req, res, next) {
         'lasterchapter': lasterchapter,
         'idchapter': idchapter,
         'cover': cover,
+        'mcover': mcover,
         'author': view,
         // 'lastupdates': lastupdates
       })

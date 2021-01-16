@@ -32,7 +32,7 @@ router.get("/", function (req, res, next) {
   var idchapter = null;
   var cover = null;
   var lastupdates = [];
-  var update_time = null;
+  var mcover = null;
   var id = null;
   var view = null;
   var totalpages = null;
@@ -72,9 +72,7 @@ router.get("/", function (req, res, next) {
         .find(".lazyimg")
         .each(function () {
           cover = $(this).attr('data-desk-image');
-          // cover = 'https://webnovel.online' + cover;
-          // console.log(cover);
-          //   console.log(idchapter)
+          mcover = $(this).attr('data-image');
         });
       // $(this)
       //   .find("span:nth-child(2)")
@@ -90,6 +88,7 @@ router.get("/", function (req, res, next) {
         'lasterchapter': lasterchapter,
         'idchapter': idchapter,
         'cover': cover,
+        'mcover': mcover,
         'author': view,
         // 'lastupdates': lastupdates
       })
