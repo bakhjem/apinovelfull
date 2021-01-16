@@ -42,8 +42,8 @@ router.get("/", function (req, res, next) {
   var update_time = null;
   var id = null;
   var totalpages = null;
-  console.log(URL + idnovels +'/trang-'+ pages+'/')
-  getPageContent(URL + idnovels +'/trang-'+ pages).then($ => {
+  console.log(URL + idnovels + '/trang-' + pages + '/')
+  getPageContent(URL + idnovels + '/trang-' + pages).then($ => {
     novelsname = $("h3.title").text();
     cover = $('.book img').attr('src');
     // cover = 'https://webnovel.online'+cover;
@@ -80,14 +80,28 @@ router.get("/", function (req, res, next) {
         });
 
     });
-    let page = $("ul.pagination.pagination-sm li a").last().attr("href");
     let lastpage = '';
-    if (page !== undefined) {
-      lastpage = page.slice(page.indexOf('trang-') + 6, (page.indexOf('#list-chapter')) - 1)
+    let totalpage = $("ul.pagination.pagination-sm li a:contains('Cuối')").attr("href")
+    let nextpage = $("ul.pagination.pagination-sm li a:contains('Trang tiếp')").attr("href")
+    console.log(totalpage)
+    if (totalpage !== undefined) {
+      lastpage = totalpage.slice(totalpage.indexOf('trang-') + 6, (totalpage.indexOf('#list-chapter')) - 1)
+    } else {
+      if (nextpage !== undefined) {
+        let page = $("ul.pagination.pagination-sm li a").eq(-3).attr("href");
+        console.log(page)
+        if (page !== undefined) {
+          lastpage = page.slice(page.indexOf('trang-') + 6, (page.indexOf('#list-chapter')) - 1)
+        }
+        else {
+          lastpage = '1'
+        }
+      } else {
+        lastpage = pages
+      }
+
     }
-    else {
-      lastpage = '1'
-    }
+
     console.log(lastpage)
     novel = {
       novelsname: novelsname,
