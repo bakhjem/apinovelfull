@@ -71,7 +71,7 @@ router.get("/", function (req, res, next) {
           chaptername = $(this).text();
           var chapterid = $(this).attr("href");
           idchapter = chapterid.slice(
-            chapterid.search(idnovels + "/") + (idnovels.length + 23)
+            chapterid.lastIndexOf(idnovels) + (idnovels.length)
           );
           chapterlist.push({
             chaptername: chaptername,
@@ -83,7 +83,6 @@ router.get("/", function (req, res, next) {
     let lastpage = '';
     let totalpage = $("ul.pagination.pagination-sm li a:contains('Cuối')").attr("href")
     let nextpage = $("ul.pagination.pagination-sm li a:contains('Trang tiếp')").attr("href")
-    console.log(totalpage)
     if (totalpage !== undefined) {
       lastpage = totalpage.slice(totalpage.indexOf('trang-') + 6, (totalpage.indexOf('#list-chapter')) - 1)
     } else {
