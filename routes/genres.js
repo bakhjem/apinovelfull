@@ -44,7 +44,7 @@ router.get("/", function (req, res, next) {
     // );
     // var pagett = $(".pagination-outter ul li.hidden").text();
     // totalpage = pagett.slice(pagett.search("/") + 2);
-    $(".list.list-truyen.col-xs-12 .row").each(function (result) {
+    $("div.row[itemscope]").each(function (result) {
       // console.log($(this).html())
       $(this)
         .find(".truyen-title a")
