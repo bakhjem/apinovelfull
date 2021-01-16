@@ -71,7 +71,7 @@ router.get("/", function (req, res, next) {
           idchapter = chapterid.slice(
             chapterid.search(idnovels + "/") + (idnovels.length + 23)
           );
-          chapterlist.unshift({
+          chapterlist.push({
             chaptername: chaptername,
             idchapter: idchapter
           })
