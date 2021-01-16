@@ -9,6 +9,7 @@ router.get("/", function (req, res, next) {
   res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate')
   var novel = [];
   var idnovels = req.query.id;
+  var pages = req.query.page;
   const URL = "https://truyenfull.vn/";
 
   const getPageContent = uri => {
@@ -78,19 +79,19 @@ router.get("/", function (req, res, next) {
         });
 
     });
-   let page = $("ul.pagination.pagination-sm li a").last().attr("href");
-   let lastpage = '';
-   if(page !== undefined){
-    lastpage  = page.slice(page.indexOf('trang-')+6,(page.indexOf('#list-chapter'))-1)
-   }
-   else {
-    lastpage = '1'
-   }
-   console.log(lastpage)
+    let page = $("ul.pagination.pagination-sm li a").last().attr("href");
+    let lastpage = '';
+    if (page !== undefined) {
+      lastpage = page.slice(page.indexOf('trang-') + 6, (page.indexOf('#list-chapter')) - 1)
+    }
+    else {
+      lastpage = '1'
+    }
+    console.log(lastpage)
     novel = {
       novelsname: novelsname,
       idnovels: idnovels,
-      // othername: othername,
+      pages: (pages !== null && pages !== undefined) ? pages : 1,
       author: author,
       cover: cover,
       genresdata: genresdata,
