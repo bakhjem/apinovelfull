@@ -40,30 +40,30 @@ router.get("/", function (req, res, next) {
   var id = null;
   var totalpages = null;
   getPageContent(URL + idnovels + idchapter).then($ => {
+
     chaptername = $('.chapter-title').text();
     $("#chapter-c").each(function (result) {
       content = $(this).html();
       // totalcontent = totalcontent.concat(content, '</br>')
       // totalcontent = content.slice(content.search('<hr'),content.lastIndexOf('<hr>'))
     })
-    // if (totalcontent === '') {
-    //   totalcontent = $('#content').html();
-    //   novel = {
-    //     idnovels: idnovels,
-    //     idchapter: idchapter,
-    //     chaptername: chaptername,
-    //     content: totalcontent
-    //   }
-    //   return res.send(JSON.stringify(novel));
-    // }
-    // if(totalcontent === null){
-    //   totalcontent = 
-    // }
+    let prechap = $("#prev_chap").attr("href");
+    let nextchap = $("#next_chap").attr("href");
+    prechap = prechap.slice(
+      prechap.lastIndexOf(idnovels) + (idnovels.length)
+    );
+    nextchap = nextchap.slice(
+      nextchap.lastIndexOf(idnovels) + (idnovels.length)
+    );
+    console.log(prechap)
+    console.log(nextchap)
     novel = {
       idnovels: idnovels,
       idchapter: idchapter,
       chaptername: chaptername,
-      content: content
+      content: content,
+      prechap: prechap,
+      nextchap: nextchap
     }
     res.send(JSON.stringify(novel));
   });
