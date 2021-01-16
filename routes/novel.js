@@ -42,7 +42,8 @@ router.get("/", function (req, res, next) {
   var update_time = null;
   var id = null;
   var totalpages = null;
-  getPageContent(URL + idnovels).then($ => {
+  console.log(URL + idnovels +'trang-'+ pages)
+  getPageContent(URL + idnovels +'trang-'+ pages).then($ => {
     novelsname = $("h3.title").text();
     cover = $('.book img').attr('src');
     // cover = 'https://webnovel.online'+cover;
