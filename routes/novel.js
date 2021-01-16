@@ -83,18 +83,27 @@ router.get("/", function (req, res, next) {
     let lastpage = '';
     let totalpage = $("ul.pagination.pagination-sm li a:contains('Cuối')").attr("href")
     let nextpage = $("ul.pagination.pagination-sm li a:contains('Trang tiếp')").attr("href")
+    let lasspage = $("ul.pagination.pagination-sm li a:contains('Chọn trang')").attr("href")
+    console.log(totalpage)
     if (totalpage !== undefined) {
       lastpage = totalpage.slice(totalpage.indexOf('trang-') + 6, (totalpage.indexOf('#list-chapter')) - 1)
     } else {
       if (nextpage !== undefined) {
-        let page = $("ul.pagination.pagination-sm li a").eq(-3).attr("href");
-        console.log(page)
-        if (page !== undefined) {
+        if (lasspage !== undefined) {
+          console.log(nextpage)
+          let page = $("ul.pagination.pagination-sm li a").eq(-3).attr("href");
+          console.log(page)
+          if (page !== undefined) {
+            lastpage = page.slice(page.indexOf('trang-') + 6, (page.indexOf('#list-chapter')) - 1)
+          }
+          else {
+            lastpage = '1'
+          }
+        } else {
+          let page = $("ul.pagination.pagination-sm li a").eq(-2).attr("href");
           lastpage = page.slice(page.indexOf('trang-') + 6, (page.indexOf('#list-chapter')) - 1)
         }
-        else {
-          lastpage = '1'
-        }
+
       } else {
         lastpage = pages
       }
